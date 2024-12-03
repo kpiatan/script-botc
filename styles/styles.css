@@ -1,0 +1,28 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+main {
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #444;
+}
+
+#character-list, #script-output {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  background: white;
+}
