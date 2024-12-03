@@ -1,0 +1,19 @@
+{
+  "characters": [
+    {
+      "name": "Empath",
+      "type": "Townsfolk",
+      "description": "Você sabe quantos dos seus vizinhos são Minions ou Demons."
+    },
+    {
+      "name": "Undertaker",
+      "type": "Townsfolk",
+      "description": "Você aprende o papel verdadeiro de quem foi executado hoje."
+    },
+    {
+      "name": "Imp",
+      "type": "Demon",
+      "description": "Mate um jogador por noite. Se você morrer, um Minion torna-se o Imp."
+    }
+  ]
+}
