@@ -1,15 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const characterList = document.getElementById("character-list");
-
-  // Carregar personagens do JSON
-  fetch("data/characters.json")
-    .then(response => response.json())
-    .then(data => {
-      data.characters.forEach(character => {
-        const div = document.createElement("div");
-        div.textContent = `${character.name} (${character.type})`;
-        characterList.appendChild(div);
+document.addEventListener('DOMContentLoaded', function() {
+  // Função para carregar o arquivo JSON
+  fetch('characters.json')
+    .then(response => response.json())  // Converte a resposta em formato JSON
+    .then(characters => {
+      // Acessa o elemento onde a lista de personagens será exibida
+      const characterListDiv = document.getElementById('character-list');
+      const ul = document.createElement('ul');
+      
+      // Para cada personagem no JSON, cria um item na lista
+      characters.forEach(character => {
+        const li = document.createElement('li');
+        li.textContent = character.name;  // Exibe apenas o nome do personagem
+        ul.appendChild(li);
       });
+
+      characterListDiv.appendChild(ul);  // Adiciona a lista ao HTML
     })
-    .catch(error => console.error("Erro ao carregar personagens:", error));
+    .catch(error => console.error('Erro ao carregar o arquivo JSON:', error));  // Caso ocorra algum erro
 });
