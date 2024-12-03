@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Função para carregar o arquivo JSON
-  fetch('characters.json')
+  fetch('data/characters.json')
     .then(response => response.json())  // Converte a resposta em formato JSON
     .then(characters => {
       // Acessa o elemento onde a lista de personagens será exibida
