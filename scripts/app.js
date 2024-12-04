@@ -1,91 +1,54 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Carregar o arquivo JSON
-  fetch('data/characters.json')
-    .then(response => response.json()) // Converte para JSON
-    .then(characters => {
-      console.log('Personagens carregados:', characters);
-
-      // Agrupar os personagens por "type"
-      const groupedByType = characters.reduce((acc, character) => {
-        if (!acc[character.type]) {
-          acc[character.type] = [];
-        }
-        acc[character.type].push(character);
-        return acc;
-      }, {});
-
-      // Renderizar os grupos de personagens
-      const characterListDiv = document.getElementById('character-list');
-      for (const type in groupedByType) {
-        const section = document.createElement('section');
-        const h3 = document.createElement('h3');
-        h3.textContent = type;
-        section.appendChild(h3);
-
-        const ul = document.createElement('ul');
-        groupedByType[type].forEach(character => {
-          const li = document.createElement('li');
-          const checkbox = document.createElement('input');
-          checkbox.type = 'checkbox';
-          checkbox.value = character.name;
-          checkbox.dataset.ability = character.ability;
-          checkbox.dataset.type = character.type;
-          checkbox.dataset.id = character.id; // Adiciona o ID ao dataset
-          checkbox.id = `checkbox-${character.name}`;
-
-          const label = document.createElement('label');
-          label.htmlFor = checkbox.id;
-          label.textContent = character.name;
-
-          li.appendChild(checkbox);
-          li.appendChild(label);
-          ul.appendChild(li);
-        });
-
-        section.appendChild(ul);
-        characterListDiv.appendChild(section);
-      }
-
-      // Evento de clique no botão "Selecionar personagens"
-      document.getElementById('get-selected').addEventListener('click', function () {
-        const selected = [];
-        document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-          selected.push({
-            name: checkbox.value,
-            ability: checkbox.dataset.ability,
-            type: checkbox.dataset.type,
-            id: checkbox.dataset.id // Adiciona o ID ao objeto selecionado
-          });
-        });
-
-        // Exibir os personagens selecionados
-        const selectedCharactersDiv = document.getElementById('selected-characters');
-        selectedCharactersDiv.innerHTML = '<h2>Personagens Selecionados</h2>'; // Limpa o conteúdo anterior
-
-        const ulSelected = document.createElement('ul');
-        selected.forEach(character => {
-          const li = document.createElement('li');
-
-          // Criar elemento de imagem
-          const img = document.createElement('img');
-          img.src = `images/Icon_${character.id}.png`; // Caminho da imagem
-          img.alt = character.name;
-          img.style.width = '50px'; // Ajuste o tamanho conforme necessário
-          img.style.marginRight = '10px';
-
-          // Adicionar nome e habilidade
-          const text = document.createElement('span');
-          text.innerHTML = `<strong>${character.name}</strong> (${character.type}): ${character.ability}`;
-
-          li.appendChild(img);
-          li.appendChild(text);
-          ulSelected.appendChild(li);
-        });
-
-        selectedCharactersDiv.appendChild(ulSelected);
-      });
-    })
-    .catch(error => {
-      console.error('Erro ao carregar o arquivo JSON:', error);
+document.getElementById('get-selected').addEventListener('click', function () {
+  const selected = [];
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+    selected.push({
+      id: checkbox.value,
+      name: checkbox.getAttribute('data-name'),
+      ability: checkbox.getAttribute('data-ability')
     });
+  });
+
+  if (selected.length === 0) {
+    alert('Nenhum personagem selecionado!');
+    return;
+  }
+
+  // Limpa o conteúdo anterior da seção de pré-visualização
+  const scriptOutput = document.getElementById('script-output');
+  scriptOutput.innerHTML = ''; // Remove conteúdo antigo
+
+  // Adiciona o título da seção (opcional)
+  const title = document.createElement('h3');
+  title.textContent = 'Personagens Selecionados';
+  scriptOutput.appendChild(title);
+
+  // Para cada personagem, cria um card na folha A4
+  selected.forEach(character => {
+    const characterDiv = document.createElement('div');
+    characterDiv.style.border = '1px solid #ccc';
+    characterDiv.style.margin = '10px 0';
+    characterDiv.style.padding = '10px';
+    characterDiv.style.backgroundColor = '#fdfdfd';
+
+    const characterName = document.createElement('h4');
+    characterName.textContent = character.name;
+
+    const characterAbility = document.createElement('p');
+    characterAbility.textContent = character.ability;
+
+    const characterImage = document.createElement('img');
+    characterImage.src = `images/Icon_${character.id}.png`;
+    characterImage.alt = character.name;
+    characterImage.style.width = '100px'; // Ajuste o tamanho da imagem
+    characterImage.style.display = 'block';
+    characterImage.style.marginBottom = '10px';
+
+    // Adiciona os elementos ao div do personagem
+    characterDiv.appendChild(characterImage);
+    characterDiv.appendChild(characterName);
+    characterDiv.appendChild(characterAbility);
+
+    // Adiciona o div do personagem ao script-output
+    scriptOutput.appendChild(characterDiv);
+  });
 });
