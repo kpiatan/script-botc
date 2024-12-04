@@ -1,54 +1,62 @@
-document.getElementById('get-selected').addEventListener('click', function () {
-  const selected = [];
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-    selected.push({
-      id: checkbox.value,
-      name: checkbox.getAttribute('data-name'),
-      ability: checkbox.getAttribute('data-ability')
+document.addEventListener('DOMContentLoaded', function () {
+  // Carrega o arquivo JSON contendo os personagens
+  fetch('data/characters.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro ao carregar o arquivo JSON: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(characters => {
+      console.log('Personagens carregados:', characters); // Verifica no console os personagens carregados
+
+      // Acessa o elemento onde a lista de personagens será exibida
+      const characterListDiv = document.getElementById('character-list');
+      characterListDiv.innerHTML = ''; // Limpa o conteúdo antigo (se houver)
+
+      const ul = document.createElement('ul');
+
+      // Para cada personagem no JSON, cria um item na lista
+      characters.forEach(character => {
+        const li = document.createElement('li');
+        
+        const label = document.createElement('label');
+        label.style.display = 'flex';
+        label.style.alignItems = 'center';
+        label.style.marginBottom = '10px';
+
+        // Cria o checkbox para selecionar o personagem
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = character.id; // ID do personagem
+        checkbox.setAttribute('data-name', character.name); // Nome do personagem
+        checkbox.setAttribute('data-ability', character.ability); // Habilidade do personagem
+
+        // Exibe a imagem do personagem ao lado do checkbox
+        const img = document.createElement('img');
+        img.src = `images/Icon_${character.id}.png`;
+        img.alt = character.name;
+        img.style.width = '50px';
+        img.style.marginRight = '10px';
+
+        // Nome do personagem
+        const span = document.createElement('span');
+        span.textContent = character.name;
+
+        // Adiciona os elementos ao rótulo
+        label.appendChild(checkbox);
+        label.appendChild(img);
+        label.appendChild(span);
+
+        // Adiciona o rótulo ao item da lista
+        li.appendChild(label);
+        ul.appendChild(li);
+      });
+
+      // Adiciona a lista ao div
+      characterListDiv.appendChild(ul);
+    })
+    .catch(error => {
+      console.error('Erro ao carregar a lista de personagens:', error);
     });
-  });
-
-  if (selected.length === 0) {
-    alert('Nenhum personagem selecionado!');
-    return;
-  }
-
-  // Limpa o conteúdo anterior da seção de pré-visualização
-  const scriptOutput = document.getElementById('script-output');
-  scriptOutput.innerHTML = ''; // Remove conteúdo antigo
-
-  // Adiciona o título da seção (opcional)
-  const title = document.createElement('h3');
-  title.textContent = 'Personagens Selecionados';
-  scriptOutput.appendChild(title);
-
-  // Para cada personagem, cria um card na folha A4
-  selected.forEach(character => {
-    const characterDiv = document.createElement('div');
-    characterDiv.style.border = '1px solid #ccc';
-    characterDiv.style.margin = '10px 0';
-    characterDiv.style.padding = '10px';
-    characterDiv.style.backgroundColor = '#fdfdfd';
-
-    const characterName = document.createElement('h4');
-    characterName.textContent = character.name;
-
-    const characterAbility = document.createElement('p');
-    characterAbility.textContent = character.ability;
-
-    const characterImage = document.createElement('img');
-    characterImage.src = `images/Icon_${character.id}.png`;
-    characterImage.alt = character.name;
-    characterImage.style.width = '100px'; // Ajuste o tamanho da imagem
-    characterImage.style.display = 'block';
-    characterImage.style.marginBottom = '10px';
-
-    // Adiciona os elementos ao div do personagem
-    characterDiv.appendChild(characterImage);
-    characterDiv.appendChild(characterName);
-    characterDiv.appendChild(characterAbility);
-
-    // Adiciona o div do personagem ao script-output
-    scriptOutput.appendChild(characterDiv);
-  });
 });
