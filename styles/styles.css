@@ -54,21 +54,16 @@ h1, h2 {
   margin: 10px 0;
   background: white;
 }
-/* Estilo para personagens na lista */
-#character-list li {
-  transition: background-color 0.3s, color 0.3s;
-}
 
-/* Estilo para quando o personagem está selecionado */
-#character-list li.selected {
-  background-color: #f0f8ff; /* Azul claro */
-  color: #333; /* Texto escuro */
-  font-weight: bold;
-  border-color: #007bff; /* Azul */
-}
 /* Estilo para personagens na lista */
 #character-list li {
   transition: background-color 0.3s, color 0.3s;
+  padding: 10px; /* Espaçamento interno */
+  margin-bottom: 5px; /* Espaçamento entre itens */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer; /* Indica que é clicável */
+  background-color: #fff; /* Fundo branco padrão */
 }
 
 /* Destaque para personagens selecionados */
@@ -98,5 +93,3 @@ h1, h2 {
 .type-section {
   margin-bottom: 20px;
 }
-
-
