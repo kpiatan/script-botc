@@ -1,83 +1,59 @@
-/* Estilo da folha A4 */
-.a4-sheet {
-  width: 794px; /* Largura aproximada de A4 em pixels */
-  height: 1123px; /* Altura aproximada de A4 em pixels */
-  margin: 20px auto; /* Centraliza na tela */
-  padding: 20px; /* Espaçamento interno */
-  border: 1px solid #000; /* Borda para visualização */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para aparência de folha */
-  background: #fff; /* Fundo branco */
-  overflow: auto; /* Permite rolar conteúdo se necessário */
-  font-family: Arial, sans-serif; /* Fonte básica */
-}
-
-/* Estilo para impressão */
-@media print {
-  .a4-sheet {
-    margin: 0;
-    box-shadow: none;
-    border: none;
-    width: 210mm; /* Tamanho exato A4 para impressão */
-    height: 297mm;
-  }
-
-  body *:not(.a4-sheet) {
-    display: none; /* Oculta tudo exceto a folha */
-  }
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-}
-
-header {
-  background-color: #333;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-}
-
-main {
+/* Estilo do layout principal */
+.main-container {
+  display: flex; /* Flexbox para layout de 2 colunas */
+  justify-content: space-between; /* Distribui os itens nas duas colunas */
   padding: 20px;
 }
 
-h1, h2 {
-  color: #444;
+/* Coluna da esquerda (Personagens) */
+.left-column {
+  flex: 1; /* Ocupa 1 parte do espaço disponível */
+  padding-right: 20px; /* Espaço entre a coluna e a folha */
 }
 
-#character-list, #script-output {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px 0;
-  background: white;
+/* Coluna da direita (Folha A4 com os personagens selecionados) */
+.right-column {
+  flex: 1.5; /* A coluna da direita ocupa 1.5 partes do espaço disponível */
+  max-width: 500px; /* Limita a largura da folha */
 }
 
-/* Estilo para personagens na lista */
+/* Estilo da folha A4 */
+.a4-sheet {
+  width: 100%; /* 100% da largura disponível */
+  height: auto; /* A altura será ajustada automaticamente */
+  padding: 20px; /* Espaçamento interno */
+  border: 1px solid #000;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para aparência de folha */
+  font-family: Arial, sans-serif;
+  font-size: 12px; /* Tamanho reduzido para que caiba mais texto */
+  margin-top: 20px;
+  overflow: auto; /* Permite rolar conteúdo se necessário */
+}
+
+/* Estilo dos itens de personagens na lista */
 #character-list li {
-  transition: background-color 0.3s, color 0.3s;
-  padding: 10px; /* Espaçamento interno */
-  margin-bottom: 5px; /* Espaçamento entre itens */
+  padding: 10px;
+  margin-bottom: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  cursor: pointer; /* Indica que é clicável */
-  background-color: #fff; /* Fundo branco padrão */
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Destaque para personagens selecionados */
+/* Estilo para quando o personagem está selecionado */
 #character-list li.selected {
   background-color: #ffd700; /* Amarelo para destacar */
-  color: #000; /* Texto preto */
+  color: #000;
   font-weight: bold;
   border-color: #ff8c00; /* Laranja */
 }
 
 /* Estilo para botões de colapsar/descolapsar */
 .toggle-button {
-  background-color: #007bff; /* Azul */
-  color: #fff; /* Texto branco */
+  background-color: #007bff;
+  color: #fff;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -87,7 +63,7 @@ h1, h2 {
 }
 
 .toggle-button:hover {
-  background-color: #0056b3; /* Azul escuro ao passar o mouse */
+  background-color: #0056b3;
 }
 
 .type-section {
