@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Para cada personagem no JSON, cria um item na lista com checkbox
       characters.forEach(character => {
-        console.log('Adicionando personagem:', character.name); // Exibe o nome do personagem no console
-
         const li = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -33,4 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => {
       console.error('Erro ao carregar o arquivo JSON:', error); // Caso ocorra algum erro
     });
+
+  // Adiciona o evento de clique ao botão para capturar personagens selecionados
+  document.getElementById('get-selected').addEventListener('click', function () {
+    const selected = [];
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+      selected.push(checkbox.value);
+    });
+    console.log('Personagens selecionados:', selected); // Mostra os selecionados no console
+  });
 });
