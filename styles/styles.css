@@ -66,4 +66,37 @@ h1, h2 {
   font-weight: bold;
   border-color: #007bff; /* Azul */
 }
+/* Estilo para personagens na lista */
+#character-list li {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Destaque para personagens selecionados */
+#character-list li.selected {
+  background-color: #ffd700; /* Amarelo para destacar */
+  color: #000; /* Texto preto */
+  font-weight: bold;
+  border-color: #ff8c00; /* Laranja */
+}
+
+/* Estilo para botões de colapsar/descolapsar */
+.toggle-button {
+  background-color: #007bff; /* Azul */
+  color: #fff; /* Texto branco */
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3; /* Azul escuro ao passar o mouse */
+}
+
+.type-section {
+  margin-bottom: 20px;
+}
+
 
