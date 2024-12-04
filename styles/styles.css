@@ -1,3 +1,31 @@
+/* Estilo da folha A4 */
+.a4-sheet {
+  width: 794px; /* Largura aproximada de A4 em pixels */
+  height: 1123px; /* Altura aproximada de A4 em pixels */
+  margin: 20px auto; /* Centraliza na tela */
+  padding: 20px; /* Espaçamento interno */
+  border: 1px solid #000; /* Borda para visualização */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para aparência de folha */
+  background: #fff; /* Fundo branco */
+  overflow: auto; /* Permite rolar conteúdo se necessário */
+  font-family: Arial, sans-serif; /* Fonte básica */
+}
+
+/* Estilo para impressão */
+@media print {
+  .a4-sheet {
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    width: 210mm; /* Tamanho exato A4 para impressão */
+    height: 297mm;
+  }
+
+  body *:not(.a4-sheet) {
+    display: none; /* Oculta tudo exceto a folha */
+  }
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
