@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Agrupar os personagens por "type"
       const groupedByType = characters.reduce((acc, character) => {
-        // Verifica se já existe um grupo para o tipo
         if (!acc[character.type]) {
           acc[character.type] = [];
         }
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       for (const type in groupedByType) {
         const section = document.createElement('section');
         const h3 = document.createElement('h3');
-        h3.textContent = type; // Nome do tipo de personagem (ex: "Vilões", "Heróis")
+        h3.textContent = type;
         section.appendChild(h3);
 
         const ul = document.createElement('ul');
@@ -28,9 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
           const li = document.createElement('li');
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
-          checkbox.value = character.name; // Nome do personagem
-          checkbox.dataset.ability = character.ability; // Habilidade do personagem
-          checkbox.dataset.type = character.type; // Tipo do personagem
+          checkbox.value = character.name;
+          checkbox.dataset.ability = character.ability;
+          checkbox.dataset.type = character.type;
+          checkbox.dataset.id = character.id; // Adiciona o ID ao dataset
           checkbox.id = `checkbox-${character.name}`;
 
           const label = document.createElement('label');
@@ -52,8 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
           selected.push({
             name: checkbox.value,
-            ability: checkbox.dataset.ability, // Habilidade
-            type: checkbox.dataset.type // Tipo
+            ability: checkbox.dataset.ability,
+            type: checkbox.dataset.type,
+            id: checkbox.dataset.id // Adiciona o ID ao objeto selecionado
           });
         });
 
@@ -64,7 +65,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const ulSelected = document.createElement('ul');
         selected.forEach(character => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${character.name}</strong> (${character.type}): ${character.ability}`;
+
+          // Criar elemento de imagem
+          const img = document.createElement('img');
+          img.src = `images/Icon_${character.id}.png`; // Caminho da imagem
+          img.alt = character.name;
+          img.style.width = '50px'; // Ajuste o tamanho conforme necessário
+          img.style.marginRight = '10px';
+
+          // Adicionar nome e habilidade
+          const text = document.createElement('span');
+          text.innerHTML = `<strong>${character.name}</strong> (${character.type}): ${character.ability}`;
+
+          li.appendChild(img);
+          li.appendChild(text);
           ulSelected.appendChild(li);
         });
 
