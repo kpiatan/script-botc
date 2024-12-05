@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('data/characters.json')
     .then(response => response.json())
     .then(characters => {
-      // Organização por tipo
       const characterList = document.getElementById('character-list');
 
       // Agrupa os personagens por tipo
@@ -49,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           // Evento de seleção
           li.addEventListener('click', function () {
-            li.classList.toggle('selected'); // Adiciona ou remove a classe "selected"
-            updateSelectedCharacters(); // Atualiza a folha A4
+            li.classList.toggle('selected');
+            updateSelectedCharacters();
           });
 
           ul.appendChild(li);
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Atualiza os personagens selecionados na folha A4
   function updateSelectedCharacters() {
     const selectedCharacters = document.querySelectorAll('#character-list li.selected');
-    const selectedContainer = document.getElementById('selected-characters');
+    const selectedContainer = document.getElementById('script-output');
 
     // Limpa os personagens da folha A4 antes de adicionar os novos
     selectedContainer.innerHTML = '';
@@ -97,13 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const leftColumn = document.querySelector('.left-column');
     const rightColumn = document.querySelector('.right-column');
 
-    // Esconde a coluna da esquerda temporariamente
-    leftColumn.style.display = 'none';
-
-    // Aciona a impressão
-    window.print();
-
-    // Restaura a coluna da esquerda após a impressão
-    leftColumn.style.display = 'block';
+    if (leftColumn) {
+      leftColumn.style.display = 'none'; // Esconde a coluna da esquerda temporariamente
+      window.print(); // Aciona a impressão
+      leftColumn.style.display = 'block'; // Restaura a coluna da esquerda após a impressão
+    }
   });
 });
