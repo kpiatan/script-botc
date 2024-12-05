@@ -3,6 +3,7 @@
   display: flex; /* Layout de duas colunas */
   gap: 20px; /* Espaçamento entre as colunas */
   padding: 20px;
+  height: 100vh; /* Garante que ocupe toda a altura da tela */
 }
 
 /* Coluna da esquerda (Seleção de personagens) */
@@ -11,17 +12,22 @@
   max-width: 20%; /* 20% da largura da tela */
   overflow-y: auto; /* Permite rolagem vertical */
   border-right: 1px solid #ddd; /* Divisão visual */
+  padding: 10px;
 }
 
 /* Coluna da direita (Folha A4) */
 .right-column {
   flex: 4; /* Ocupa mais espaço */
   padding: 20px;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente a folha A4 */
+  align-items: flex-start; /* Alinha no topo */
 }
 
 /* Estilo da folha A4 */
 .a4-sheet {
-  width: 100%;
+  width: 100%; /* Ajusta à largura da coluna */
+  max-width: 210mm; /* Largura máxima do A4 */
   height: auto;
   padding: 20px;
   border: 1px solid #000;
@@ -30,7 +36,9 @@
   font-family: Arial, sans-serif;
   font-size: 12px;
   overflow: auto;
-  display: grid; /* Usando grid para organização */
+
+  /* Usando grid para organização dos personagens */
+  display: grid; 
   grid-template-columns: repeat(2, 1fr); /* Dois personagens por linha */
   gap: 10px; /* Espaçamento entre os personagens */
 }
@@ -43,6 +51,7 @@
 
   .right-column {
     flex: 1; /* Ocupa toda a largura na impressão */
+    padding: 0; /* Remove espaçamento extra */
   }
 
   .a4-sheet {
@@ -51,5 +60,58 @@
     margin: 0 auto;
     width: 210mm;
     height: 297mm;
+    page-break-inside: avoid; /* Evita quebra no meio da folha */
   }
+}
+
+/* Personagens na folha A4 */
+.selected-character {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected-character img {
+  max-width: 50px;
+  margin-bottom: 5px;
+}
+
+/* Estilo para os itens de personagens na lista */
+#character-list li {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#character-list li.selected {
+  background-color: #ffd700; /* Amarelo para destaque */
+  color: #000;
+  font-weight: bold;
+  border-color: #ff8c00; /* Laranja */
+}
+
+/* Botão de colapsar/descolapsar */
+.toggle-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
 }
