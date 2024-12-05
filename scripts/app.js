@@ -78,3 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('Erro ao carregar o arquivo JSON:', error);
     });
 });
+document.getElementById('print-button').addEventListener('click', function() {
+  window.print();
+});
