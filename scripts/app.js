@@ -1,83 +1,41 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Carregar o arquivo JSON
-  fetch('data/characters.json')
-    .then(response => response.json())
-    .then(characters => {
-      const characterListDiv = document.getElementById('character-list');
-      const scriptOutputDiv = document.getElementById('script-output');
+// Atualiza os personagens selecionados na folha A4
+function updateSelectedCharacters() {
+  const selectedCharacters = document.querySelectorAll('#character-list li.selected');
+  const selectedContainer = document.getElementById('selected-characters');
 
-      // Agrupar personagens por tipo
-      const types = {};
-      characters.forEach(character => {
-        if (!types[character.type]) types[character.type] = [];
-        types[character.type].push(character);
-      });
+  // Limpa os personagens da folha A4 antes de adicionar os novos
+  selectedContainer.innerHTML = '';
 
-      // Criar lista de personagens agrupada por tipo
-      Object.keys(types).forEach(type => {
-        const section = document.createElement('div');
-        section.classList.add('type-section');
-        
-        const toggleButton = document.createElement('button');
-        toggleButton.classList.add('toggle-button');
-        toggleButton.textContent = type;
-        toggleButton.addEventListener('click', function () {
-          const list = section.querySelector('ul');
-          list.style.display = list.style.display === 'none' ? 'block' : 'none';
-        });
+  selectedCharacters.forEach(character => {
+    const characterName = character.textContent;
+    const characterImg = character.querySelector('img').src;
 
-        const ul = document.createElement('ul');
-        ul.style.display = 'none'; // Inicialmente escondido
+    const characterDiv = document.createElement('div');
+    characterDiv.classList.add('selected-character');
 
-        types[type].forEach(character => {
-          const li = document.createElement('li');
-          li.textContent = character.name;
-          li.dataset.id = character.id; // ID único do personagem
-          li.classList.add('character-item');
+    const img = document.createElement('img');
+    img.src = characterImg;
 
-          // Adicionar evento de clique para adicionar/remover da folha A4
-          li.addEventListener('click', function () {
-            li.classList.toggle('selected'); // Alternar seleção
-            if (li.classList.contains('selected')) {
-              addCharacterToSheet(character);
-            } else {
-              removeCharacterFromSheet(character);
-            }
-          });
+    const name = document.createElement('p');
+    name.textContent = characterName;
 
-          ul.appendChild(li);
-        });
+    characterDiv.appendChild(img);
+    characterDiv.appendChild(name);
 
-        section.appendChild(toggleButton);
-        section.appendChild(ul);
-        characterListDiv.appendChild(section);
-      });
+    selectedContainer.appendChild(characterDiv);
+  });
+}
 
-      // Função para adicionar personagem à folha A4
-      function addCharacterToSheet(character) {
-        const characterDiv = document.createElement('div');
-        characterDiv.classList.add('selected-character');
-        characterDiv.dataset.id = character.id;
-        characterDiv.innerHTML = `
-          <h3>${character.name}</h3>
-          <p>${character.ability}</p>
-          <img src="images/Icon_${character.id}.png" alt="${character.name}" />
-        `;
-        scriptOutputDiv.appendChild(characterDiv);
-      }
-
-      // Função para remover personagem da folha A4
-      function removeCharacterFromSheet(character) {
-        const characterDiv = scriptOutputDiv.querySelector(`[data-id="${character.id}"]`);
-        if (characterDiv) {
-          scriptOutputDiv.removeChild(characterDiv);
-        }
-      }
-    })
-    .catch(error => {
-      console.error('Erro ao carregar o arquivo JSON:', error);
-    });
-});
-document.getElementById('print-button').addEventListener('click', function() {
+// Adiciona o evento de clique para impressão
+document.getElementById('print-button').addEventListener('click', function () {
+  const rightColumn = document.querySelector('.right-column');
+  
+  // Remove temporariamente a coluna da esquerda
+  document.querySelector('.left-column').style.display = 'none';
+  
+  // Aciona a impressão
   window.print();
+  
+  // Restaura a coluna da esquerda após a impressão
+  document.querySelector('.left-column').style.display = 'block';
 });
