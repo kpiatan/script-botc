@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           // Evento de seleção
           li.addEventListener('click', function () {
-            li.classList.toggle('selected');
-            updateSelectedCharacters();
+            li.classList.toggle('selected'); // Adiciona ou remove a classe "selected"
+            updateSelectedCharacters(); // Atualiza a folha A4
           });
 
           ul.appendChild(li);
