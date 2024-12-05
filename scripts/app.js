@@ -74,6 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
     selectedCharacters.forEach(character => {
       const characterName = character.textContent.trim();
       const characterImg = character.querySelector('img').src;
+      const characterId = character.textContent.trim(); // Aqui vai o nome para buscar no JSON
+
+      // Encontra o personagem correspondente
+      const characterData = characters.find(char => char.name === characterId);
 
       const characterDiv = document.createElement('div');
       characterDiv.classList.add('selected-character');
@@ -84,8 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const name = document.createElement('p');
       name.textContent = characterName;
 
+      const ability = document.createElement('p');
+      ability.textContent = `Habilidade: ${characterData.ability}`;
+
       characterDiv.appendChild(img);
       characterDiv.appendChild(name);
+      characterDiv.appendChild(ability);
 
       selectedContainer.appendChild(characterDiv);
     });
