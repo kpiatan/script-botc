@@ -19,26 +19,9 @@
   max-width: 600px; /* Limita a largura da folha */
 }
 
-/* Estilo para botões */
-.select-button {
-  background-color: #28a745; /* Verde */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px; /* Espaçamento acima do botão */
-  display: block; /* Ocupa toda a largura disponível */
-}
-
-.select-button:hover {
-  background-color: #218838; /* Verde mais escuro ao passar o mouse */
-}
-
 /* Estilo da folha A4 */
 .a4-sheet {
   width: 100%; /* 100% da largura disponível */
-  height: auto; /* A altura será ajustada automaticamente */
   padding: 20px; /* Espaçamento interno */
   border: 1px solid #000;
   background-color: #fff;
@@ -60,7 +43,7 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Estilo para quando o personagem está selecionado */
+/* Destaque para personagens selecionados */
 #character-list li.selected {
   background-color: #ffd700; /* Amarelo para destacar */
   color: #000;
@@ -87,12 +70,6 @@
 .type-section {
   margin-bottom: 20px;
 }
-/* Personagem selecionado na lista */
-#character-list li.selected {
-  background-color: #ffd700; /* Amarelo para destaque */
-  color: #000;
-  font-weight: bold;
-}
 
 /* Personagens na folha A4 */
 .selected-character {
@@ -101,10 +78,28 @@
   margin-bottom: 10px;
   border-radius: 4px;
   background-color: #f9f9f9;
+  display: flex;
+  align-items: center; /* Alinha texto e imagem */
+  gap: 10px; /* Espaçamento entre imagem e texto */
 }
 
 .selected-character img {
   max-width: 50px;
+  max-height: 50px; /* Adicionado para evitar distorções */
   margin-top: 5px;
+  border-radius: 4px; /* Deixa a imagem levemente arredondada */
 }
 
+/* Ajuste responsivo */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column; /* Empilha colunas em telas pequenas */
+    gap: 10px;
+  }
+
+  .left-column,
+  .right-column {
+    max-width: 100%; /* Colunas ocupam toda a largura */
+    flex: 1; /* Mesmo espaço para ambas */
+  }
+}
