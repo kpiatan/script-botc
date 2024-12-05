@@ -80,6 +80,12 @@
   margin-bottom: 5px;
 }
 
+.selected-character p {
+  font-size: 10px;
+  margin-top: 5px;
+  color: #555;
+}
+
 /* Estilo para os itens de personagens na lista */
 #character-list li {
   padding: 10px;
