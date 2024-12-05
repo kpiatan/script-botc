@@ -1,128 +1,55 @@
 /* Estilo do layout principal */
 .main-container {
-  display: flex; /* Flexbox para layout de 2 colunas */
-  justify-content: space-between; /* Distribui os itens nas duas colunas */
-  padding: 20px;
+  display: flex; /* Layout de duas colunas */
   gap: 20px; /* Espaçamento entre as colunas */
+  padding: 20px;
 }
 
-/* Coluna da esquerda (Personagens) */
+/* Coluna da esquerda (Seleção de personagens) */
 .left-column {
-  flex: 0.2; /* Coluna da esquerda ocupa 20% da largura */
-  padding-right: 20px; /* Espaço entre a coluna e a folha */
-  overflow-y: auto; /* Permite rolar a lista de personagens se necessário */
+  flex: 1; /* Ocupa menos espaço */
+  max-width: 20%; /* 20% da largura da tela */
+  overflow-y: auto; /* Permite rolagem vertical */
+  border-right: 1px solid #ddd; /* Divisão visual */
 }
 
-/* Coluna da direita (Folha A4 com os personagens selecionados) */
+/* Coluna da direita (Folha A4) */
 .right-column {
-  flex: 0.8; /* A coluna da direita ocupa 80% da largura */
-  max-width: 600px; /* Limita a largura da folha */
-  position: relative;
+  flex: 4; /* Ocupa mais espaço */
+  padding: 20px;
 }
 
 /* Estilo da folha A4 */
 .a4-sheet {
-  width: 100%; /* 100% da largura disponível */
-  height: auto; /* A altura será ajustada automaticamente */
-  padding: 20px; /* Espaçamento interno */
+  width: 100%;
+  height: auto;
+  padding: 20px;
   border: 1px solid #000;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para aparência de folha */
   font-family: Arial, sans-serif;
-  font-size: 12px; /* Tamanho reduzido para que caiba mais texto */
-  margin-top: 20px;
-  overflow: auto; /* Permite rolar conteúdo se necessário */
-  display: flex; /* Habilita layout flex para múltiplas colunas */
-  flex-wrap: wrap; /* Permite quebrar para a próxima linha */
-  gap: 10px; /* Espaço entre os itens nas colunas */
+  font-size: 12px;
+  overflow: auto;
+  display: grid; /* Usando grid para organização */
+  grid-template-columns: repeat(2, 1fr); /* Dois personagens por linha */
+  gap: 10px; /* Espaçamento entre os personagens */
 }
 
-/* Estilo dos itens de personagens na lista */
-#character-list li {
-  padding: 10px;
-  margin-bottom: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #fff;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Estilo para quando o personagem está selecionado */
-#character-list li.selected {
-  background-color: #ffd700; /* Amarelo para destacar */
-  color: #000;
-  font-weight: bold;
-  border-color: #ff8c00; /* Laranja */
-}
-
-/* Personagem selecionado na folha A4 */
-.selected-character {
-  border: 1px solid #ddd;
-  padding: 5px; /* Reduz o espaço interno */
-  margin-bottom: 5px; /* Reduz o espaço entre os personagens */
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  display: flex; /* Para organizar imagem e texto em linha */
-  align-items: center; /* Alinha verticalmente */
-  gap: 10px; /* Espaço entre a imagem e o texto */
-  width: calc(50% - 10px); /* Cada personagem ocupa metade da largura da folha */
-}
-
-/* Imagem dos personagens */
-.selected-character img {
-  max-width: 40px; /* Tamanho reduzido para imagens */
-  height: auto; /* Mantém proporção */
-  margin: 0; /* Remove margens extras */
-}
-
-/* Estilo para botões */
-.select-button {
-  background-color: #28a745; /* Verde */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px; /* Espaçamento acima do botão */
-  display: block; /* Ocupa toda a largura disponível */
-}
-
-.select-button:hover {
-  background-color: #218838; /* Verde mais escuro ao passar o mouse */
-}
-
-/* Estilo para botões de colapsar/descolapsar */
-.toggle-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.toggle-button:hover {
-  background-color: #0056b3;
-}
-
-.type-section {
-  margin-bottom: 20px;
-}
-
-/* Estilo para impressão */
+/* Esconde a coluna da esquerda na impressão */
 @media print {
-  body *:not(.a4-sheet) {
-    display: none; /* Oculta tudo, exceto a folha */
+  .left-column {
+    display: none;
+  }
+
+  .right-column {
+    flex: 1; /* Ocupa toda a largura na impressão */
   }
 
   .a4-sheet {
-    width: 210mm; /* Largura exata de uma folha A4 */
-    height: 297mm; /* Altura exata de uma folha A4 */
-    margin: 0; /* Remove margens */
-    box-shadow: none; /* Remove sombra */
-    border: none; /* Remove borda */
+    box-shadow: none;
+    border: none;
+    margin: 0 auto;
+    width: 210mm;
+    height: 297mm;
   }
 }
