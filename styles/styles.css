@@ -87,3 +87,24 @@
 .type-section {
   margin-bottom: 20px;
 }
+/* Personagem selecionado na lista */
+#character-list li.selected {
+  background-color: #ffd700; /* Amarelo para destaque */
+  color: #000;
+  font-weight: bold;
+}
+
+/* Personagens na folha A4 */
+.selected-character {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.selected-character img {
+  max-width: 50px;
+  margin-top: 5px;
+}
+
