@@ -8,34 +8,33 @@
 
 /* Coluna da esquerda (Personagens) */
 .left-column {
-  flex: 0 0 20%; /* Ocupa exatamente 20% da largura da tela */
-  max-width: 250px; /* Limita a largura máxima */
-  padding-right: 10px; /* Espaçamento à direita */
-  overflow-y: auto; /* Permite rolagem caso a lista seja longa */
+  flex: 0.2; /* Coluna da esquerda ocupa 20% da largura */
+  padding-right: 20px; /* Espaço entre a coluna e a folha */
+  overflow-y: auto; /* Permite rolar a lista de personagens se necessário */
 }
 
 /* Coluna da direita (Folha A4 com os personagens selecionados) */
 .right-column {
-  flex: 1; /* O resto do espaço é ocupado pela folha A4 */
-  display: flex;
-  justify-content: center; /* Centraliza a folha na coluna */
-  align-items: flex-start;
+  flex: 0.8; /* A coluna da direita ocupa 80% da largura */
+  max-width: 600px; /* Limita a largura da folha */
+  position: relative;
 }
 
 /* Estilo da folha A4 */
 .a4-sheet {
-  width: 794px; /* Largura aproximada de A4 */
-  height: 1123px; /* Altura aproximada de A4 */
+  width: 100%; /* 100% da largura disponível */
+  height: auto; /* A altura será ajustada automaticamente */
   padding: 20px; /* Espaçamento interno */
   border: 1px solid #000;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para aparência de folha */
   font-family: Arial, sans-serif;
   font-size: 12px; /* Tamanho reduzido para que caiba mais texto */
+  margin-top: 20px;
   overflow: auto; /* Permite rolar conteúdo se necessário */
-  display: grid; /* Usando grid para organizar os personagens */
-  grid-template-columns: repeat(2, 1fr); /* Divide em duas colunas */
-  gap: 10px; /* Espaçamento entre personagens */
+  display: flex; /* Habilita layout flex para múltiplas colunas */
+  flex-wrap: wrap; /* Permite quebrar para a próxima linha */
+  gap: 10px; /* Espaço entre os itens nas colunas */
 }
 
 /* Estilo dos itens de personagens na lista */
@@ -49,7 +48,7 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Destaque para personagens selecionados */
+/* Estilo para quando o personagem está selecionado */
 #character-list li.selected {
   background-color: #ffd700; /* Amarelo para destacar */
   color: #000;
@@ -57,37 +56,58 @@
   border-color: #ff8c00; /* Laranja */
 }
 
-/* Personagens na folha A4 */
+/* Personagem selecionado na folha A4 */
 .selected-character {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 5px; /* Reduz o espaço interno */
+  margin-bottom: 5px; /* Reduz o espaço entre os personagens */
   border-radius: 4px;
   background-color: #f9f9f9;
-  display: flex;
-  align-items: center; /* Alinha texto e imagem */
-  gap: 10px; /* Espaçamento entre imagem e texto */
+  display: flex; /* Para organizar imagem e texto em linha */
+  align-items: center; /* Alinha verticalmente */
+  gap: 10px; /* Espaço entre a imagem e o texto */
+  width: calc(50% - 10px); /* Cada personagem ocupa metade da largura da folha */
 }
 
+/* Imagem dos personagens */
 .selected-character img {
-  max-width: 50px;
-  max-height: 50px;
-  border-radius: 4px;
+  max-width: 40px; /* Tamanho reduzido para imagens */
+  height: auto; /* Mantém proporção */
+  margin: 0; /* Remove margens extras */
 }
 
-/* Ajuste responsivo */
-@media (max-width: 768px) {
-  .main-container {
-    flex-direction: column; /* Empilha colunas em telas pequenas */
-    gap: 10px;
-  }
+/* Estilo para botões */
+.select-button {
+  background-color: #28a745; /* Verde */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Espaçamento acima do botão */
+  display: block; /* Ocupa toda a largura disponível */
+}
 
-  .left-column,
-  .right-column {
-    max-width: 100%; /* Colunas ocupam toda a largura */
-    flex: 1; /* Mesmo espaço para ambas */
-  }
+.select-button:hover {
+  background-color: #218838; /* Verde mais escuro ao passar o mouse */
+}
 
-  .a4-sheet {
-    grid-template-columns: 1fr; /* Uma coluna para telas pequenas */
-  }
+/* Estilo para botões de colapsar/descolapsar */
+.toggle-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}
+
+.type-section {
+  margin-bottom: 20px;
 }
