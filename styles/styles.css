@@ -3,18 +3,36 @@
   display: flex; /* Flexbox para layout de 2 colunas */
   justify-content: space-between; /* Distribui os itens nas duas colunas */
   padding: 20px;
+  gap: 20px; /* Espaçamento entre as colunas */
 }
 
 /* Coluna da esquerda (Personagens) */
 .left-column {
-  flex: 1; /* Ocupa 1 parte do espaço disponível */
+  flex: 0.5; /* Ocupa menos espaço que a coluna da direita */
+  max-width: 250px; /* Limita a largura */
   padding-right: 20px; /* Espaço entre a coluna e a folha */
 }
 
 /* Coluna da direita (Folha A4 com os personagens selecionados) */
 .right-column {
-  flex: 1.5; /* A coluna da direita ocupa 1.5 partes do espaço disponível */
-  max-width: 500px; /* Limita a largura da folha */
+  flex: 2; /* A coluna da direita ocupa mais espaço */
+  max-width: 600px; /* Limita a largura da folha */
+}
+
+/* Estilo para botões */
+.select-button {
+  background-color: #28a745; /* Verde */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Espaçamento acima do botão */
+  display: block; /* Ocupa toda a largura disponível */
+}
+
+.select-button:hover {
+  background-color: #218838; /* Verde mais escuro ao passar o mouse */
 }
 
 /* Estilo da folha A4 */
