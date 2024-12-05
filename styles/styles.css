@@ -1,46 +1,44 @@
 /* Estilo do layout principal */
 .main-container {
-  display: flex; /* Layout de duas colunas */
-  gap: 20px; /* Espaçamento entre as colunas */
+  display: flex;
+  gap: 20px;
   padding: 20px;
-  height: 100vh; /* Garante que ocupe toda a altura da tela */
+  height: 100vh;
 }
 
 /* Coluna da esquerda (Seleção de personagens) */
 .left-column {
-  flex: 1; /* Ocupa menos espaço */
-  max-width: 20%; /* 20% da largura da tela */
-  overflow-y: auto; /* Permite rolagem vertical */
-  border-right: 1px solid #ddd; /* Divisão visual */
+  flex: 1;
+  max-width: 20%;
+  overflow-y: auto;
+  border-right: 1px solid #ddd;
   padding: 10px;
 }
 
 /* Coluna da direita (Folha A4) */
 .right-column {
-  flex: 4; /* Ocupa mais espaço */
+  flex: 4;
   padding: 20px;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente a folha A4 */
-  align-items: flex-start; /* Alinha no topo */
+  justify-content: center;
+  align-items: flex-start;
 }
 
 /* Estilo da folha A4 */
 .a4-sheet {
-  width: 100%; /* Ajusta à largura da coluna */
-  max-width: 210mm; /* Largura máxima do A4 */
+  width: 100%;
+  max-width: 210mm;
   height: auto;
   padding: 20px;
   border: 1px solid #000;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para aparência de folha */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   font-size: 12px;
   overflow: auto;
-
-  /* Usando grid para organização dos personagens */
-  display: grid; 
-  grid-template-columns: repeat(2, 1fr); /* Dois personagens por linha */
-  gap: 10px; /* Espaçamento entre os personagens */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
 /* Esconde a coluna da esquerda na impressão */
@@ -50,8 +48,8 @@
   }
 
   .right-column {
-    flex: 1; /* Ocupa toda a largura na impressão */
-    padding: 0; /* Remove espaçamento extra */
+    flex: 1;
+    padding: 0;
   }
 
   .a4-sheet {
@@ -60,7 +58,7 @@
     margin: 0 auto;
     width: 210mm;
     height: 297mm;
-    page-break-inside: avoid; /* Evita quebra no meio da folha */
+    page-break-inside: avoid;
   }
 }
 
@@ -94,10 +92,10 @@
 }
 
 #character-list li.selected {
-  background-color: #ffd700; /* Amarelo para destaque */
+  background-color: #ffd700;
   color: #000;
   font-weight: bold;
-  border-color: #ff8c00; /* Laranja */
+  border-color: #ff8c00;
 }
 
 /* Botão de colapsar/descolapsar */
@@ -109,7 +107,6 @@
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 10px;
-  font-weight: bold;
 }
 
 .toggle-button:hover {
