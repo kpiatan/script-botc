@@ -111,3 +111,18 @@
 .type-section {
   margin-bottom: 20px;
 }
+
+/* Estilo para impressão */
+@media print {
+  body *:not(.a4-sheet) {
+    display: none; /* Oculta tudo, exceto a folha */
+  }
+
+  .a4-sheet {
+    width: 210mm; /* Largura exata de uma folha A4 */
+    height: 297mm; /* Altura exata de uma folha A4 */
+    margin: 0; /* Remove margens */
+    box-shadow: none; /* Remove sombra */
+    border: none; /* Remove borda */
+  }
+}
